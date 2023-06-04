@@ -24,7 +24,7 @@ export const tableHead = {
   paddingTop: '12px',
   paddingBottom: '12px',
   textAlign: 'left' as 'left',
-  backgroundColor: '#04AA6D',
+  backgroundColor: 'hsl(0, 0%, 17%)',
   color: 'white'
 }
 

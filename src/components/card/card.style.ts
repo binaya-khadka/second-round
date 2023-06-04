@@ -15,7 +15,7 @@ export const padding = {
 export const head = {
   ...padding,
   display: 'flex',
-  background: '#3B5998'
+  background: 'hsl(0, 0%, 17%)'
 }
 
 export const body = {
@@ -26,7 +26,7 @@ export const body = {
 
 export const footer = {
   padding: '10px 14px',
-  background: '#aaaaaa',
+  background: 'hsl(0, 0%, 59%)',
   display: 'flex'
 }
 

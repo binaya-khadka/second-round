@@ -9,24 +9,16 @@ import { AddProduct } from "./components"
 export default function App() {
   const isMobile = useMediaQuery({ query: '(max-width: 375px)' });
   const [product, setProduct] = useState<any>(null)
+  const [editData, setEditData] = useState<any>(null)
 
-
-  const addProduct = (products: any) => {
-    // setProduct((product: any) => ({
-    //   ...product,
-    //   products
-    // }))
-
-    // setProduct((product: any) => ({
-    //   ...product,
-    //   [products?.id]: products, // Assuming `data.id` is a unique identifier for each product
-    // }));
-    console.log(product);
-
-
-    // products.id = Date.now();
-    // setProduct([...product, products])
-  }
+  const addProduct = useCallback((newProduct: any) => {
+    // console.log(newProduct)
+    setProduct((prevProduct: any) => ({
+      ...prevProduct,
+      products: [...prevProduct.products.map((product: any) => product?.id !== newProduct?.id ? product : newProduct)],
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product]);
 
   const fetchProduct: QueryFunction<any, any> = async () => {
     return await API.get('/products')
@@ -35,7 +27,9 @@ export default function App() {
   const { isLoading, isError } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProduct,
-    onSuccess: (data) => setProduct(data)
+    onSuccess: (data) => {
+      setProduct(data)
+    }
   },)
 
   const deleteProduct = useCallback(({ productId }: { productId: string }) => {
@@ -58,8 +52,8 @@ export default function App() {
 
   return (
     <div style={{ ...styles.pageContainer }}>
-      <AddProduct addProduct={addProduct} />
-      {isMobile ? <TableMobile product={product} deleteProduct={deleteProduct} /> : <Table data={product} deleteProduct={deleteProduct} />}
+      <AddProduct addProduct={addProduct} editData={editData} />
+      {isMobile ? <TableMobile product={product} deleteProduct={deleteProduct} /> : <Table setEditData={setEditData} data={product} deleteProduct={deleteProduct} />}
     </div>
   )
 }

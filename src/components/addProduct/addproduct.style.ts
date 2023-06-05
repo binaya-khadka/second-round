@@ -4,7 +4,7 @@ const lineHeight = {
 
 const centerDiv = {
   display: 'flex',
-  justifyContent: 'center' as 'center',
+  // justifyContent: 'center' as 'center',
   height: '100vh',
   alignItems: 'center' as 'center',
   flexDirection: 'column' as 'column',
@@ -23,4 +23,13 @@ const submitButton = {
   marginTop: 10,
 }
 
-export { lineHeight, centerDiv, inputField, submitButton }
+const containerStyle = {
+  borderRadius: '12px',
+  background: '#ffffff',
+  position: 'absolute' as 'absolute',
+  height: '72vh',
+  width: '40vw',
+  padding: '1rem'
+}
+
+export { lineHeight, centerDiv, inputField, submitButton, containerStyle }

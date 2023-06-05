@@ -5,20 +5,27 @@ import { Table, TableMobile } from "./components"
 import { useMediaQuery } from "react-responsive"
 import { useCallback, useState } from "react"
 import { AddProduct } from "./components"
+import Popup from 'reactjs-popup'
 
 export default function App() {
   const isMobile = useMediaQuery({ query: '(max-width: 375px)' });
   const [product, setProduct] = useState<any>(null)
   const [editData, setEditData] = useState<any>(null)
 
-  const addProduct = useCallback((newProduct: any) => {
-    // console.log(newProduct)
-    setProduct((prevProduct: any) => ({
-      ...prevProduct,
-      products: [...prevProduct.products.map((product: any) => product?.id !== newProduct?.id ? product : newProduct)],
-    }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product]);
+  const addProduct = useCallback(
+    ({ newProduct, editing }: { newProduct: any; editing: boolean }) => {
+      setProduct((prevProduct: any) => ({
+        ...prevProduct,
+        products: editing
+          ? prevProduct.products.map((product: any) =>
+            product?.id !== newProduct?.id ? product : newProduct
+          )
+          : [...prevProduct.products, newProduct],
+      }));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
+    [product]
+  );
 
   const fetchProduct: QueryFunction<any, any> = async () => {
     return await API.get('/products')
@@ -52,7 +59,10 @@ export default function App() {
 
   return (
     <div style={{ ...styles.pageContainer }}>
-      <AddProduct addProduct={addProduct} editData={editData} />
+      {/* <AddProduct addProduct={addProduct} editData={editData} /> */}
+      <Popup trigger={<button style={{ margin: '10px 1.4rem', padding: '10px 20px', background: '#dadada', border: 'none', borderRadius: '12px' }}>Add Product</button>} position="right center">
+        <AddProduct addProduct={addProduct} editData={editData} />
+      </Popup>
       {isMobile ? <TableMobile product={product} deleteProduct={deleteProduct} /> : <Table setEditData={setEditData} data={product} deleteProduct={deleteProduct} />}
     </div>
   )

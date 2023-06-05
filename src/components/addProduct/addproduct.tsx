@@ -15,14 +15,13 @@ const AddProduct = ({ addProduct, editData }: any) => {
 
   const {
     handleSubmit,
-    // formState: { errors },
     control,
     setValue
   } = useForm({
     defaultValues: {
       product_name: '',
       category_name: '',
-      created_at: Date(),
+      created_at: new Date(),
       created_by: '',
       description: '',
       status: '',
@@ -39,11 +38,14 @@ const AddProduct = ({ addProduct, editData }: any) => {
   }, [editData, setValue])
 
   const onSubmit = (data: any) => {
-    addProduct({ ...data, id: editData.id || nanoid() });
-  }
+    addProduct({
+      newProduct: { ...data, id: editData?.id || nanoid() },
+      editing: !!editData,
+    });
+  };
 
   return (
-    <div style={{ ...styles.pageContainer, ...style.lineHeight }}>
+    <div style={{ ...styles.pageContainer, ...style.lineHeight, ...style.containerStyle }}>
       <form onSubmit={handleSubmit(onSubmit)} style={{ ...style.centerDiv }}>
         <label htmlFor="product_name">Product Name</label>
         <Controller

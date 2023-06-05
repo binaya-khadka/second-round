@@ -29,7 +29,7 @@ export const tableHead = {
 }
 
 export const wrapper = {
-  padding: '1.75rem 1rem'
+  padding: '0.425rem 1rem'
 }
 
 const editButton = {

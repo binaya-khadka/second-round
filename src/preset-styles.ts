@@ -8,5 +8,6 @@ export const triggerButton = {
   padding: '10px 20px',
   background: '#dadada',
   border: 'none',
-  borderRadius: '12px'
+  borderRadius: '12px',
+  fontSize: '18px'
 }

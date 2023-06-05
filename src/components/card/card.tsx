@@ -1,6 +1,6 @@
 import * as style from './card.style'
 
-const Card = ({ product, deleteProduct }: any) => {
+const Card = ({ product, deleteProduct, setEditData }: any) => {
   return (
     <div>
       {product?.products.map((product: any, index: number) => (
@@ -16,12 +16,12 @@ const Card = ({ product, deleteProduct }: any) => {
           <div style={{ ...style.body }}>
             <p style={{ marginBottom: 12 }}><span style={{ ...style.miniTitle }}>Description: </span>{product.description}</p>
             <p><span style={{ ...style.miniTitle }}>Category: </span>{product.category_name}</p>
-            <p><span style={{ ...style.miniTitle }}>Created At: </span>
+            {/* <p><span style={{ ...style.miniTitle }}>Created At: </span>
               {product.created_at.trim().split("T")[0]}
-            </p>
+            </p> */}
           </div>
           <div style={{ ...style.footer }}>
-            <div style={{ marginRight: 10, ...style.icon }}>
+            <div style={{ marginRight: 10, ...style.icon }} onClick={() => setEditData(product)}>
               <img style={{ ...style.iconStyle, color: '#000' }} src="edit.png" alt="Edit" />
             </div>
             <div style={{ ...style.icon }} onClick={() => deleteProduct({ productId: product.id })}>

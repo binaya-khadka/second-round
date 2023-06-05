@@ -24,12 +24,14 @@ const submitButton = {
 }
 
 const containerStyle = {
-  borderRadius: '12px',
-  background: '#ffffff',
-  position: 'absolute' as 'absolute',
-  height: '72vh',
-  width: '40vw',
-  padding: '1rem'
+  // borderRadius: '12px',
+  // background: '#ffffff',
+  // background: 'rgba(0, 0, 0, 0.7)',
+  // position: 'absolute' as 'absolute',
+  // color: '#dadada',
+  // height: '72vh',
+  // width: '40vw',
+  // padding: '1rem'
 }
 
 export { lineHeight, centerDiv, inputField, submitButton, containerStyle }

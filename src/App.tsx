@@ -12,6 +12,8 @@ export default function App() {
   const [product, setProduct] = useState<any>(null)
   const [editData, setEditData] = useState<any>(null)
 
+  const [popupShown, setPopupShown] = useState<boolean>(false);
+
   const addProduct = useCallback(
     ({ newProduct, editing }: { newProduct: any; editing: boolean }) => {
       setProduct((prevProduct: any) => ({
@@ -59,11 +61,16 @@ export default function App() {
 
   return (
     <div style={{ ...styles.pageContainer }}>
-      {/* <AddProduct addProduct={addProduct} editData={editData} /> */}
-      <Popup trigger={<button style={{ margin: '10px 1.4rem', padding: '10px 20px', background: '#dadada', border: 'none', borderRadius: '12px' }}>Add Product</button>} position="right center">
+      {/* <input type="button" value="Add Product" style={styles.triggerButton} onClick={() => {
+        setPopupShown(true);
+      }} />
+      {popupShown ? (
         <AddProduct addProduct={addProduct} editData={editData} />
-      </Popup>
-      {isMobile ? <TableMobile product={product} deleteProduct={deleteProduct} /> : <Table setEditData={setEditData} data={product} deleteProduct={deleteProduct} />}
+      ) : null} */}
+      {/* <Popup trigger={<button style={{ ...styles.triggerButton, }}>Add Product</button>} position="right center"> */}
+      <AddProduct addProduct={addProduct} editData={editData} />
+      {/* </Popup> */}
+      {isMobile ? <TableMobile setEditData={setEditData} product={product} deleteProduct={deleteProduct} /> : <Table setEditData={setEditData} data={product} deleteProduct={deleteProduct} />}
     </div>
   )
 }

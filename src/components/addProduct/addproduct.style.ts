@@ -1,3 +1,21 @@
+export const modal = {
+  position: 'relative' as 'relative',
+  backgroundColor: 'rgba(0,0,0,0.3)',
+  width: '100%',
+  height: '100%',
+}
+
+export const modalInner = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-55%, 10%)',
+  backgroundColor: '#dadada',
+  padding: '1rem 1.5rem',
+  width: '24rem',
+  borderRadius: '0.5rem'
+}
+
 const lineHeight = {
   lineHeight: '1.5rem'
 }
@@ -5,7 +23,7 @@ const lineHeight = {
 const centerDiv = {
   display: 'flex',
   // justifyContent: 'center' as 'center',
-  height: '100vh',
+  // height: '100vh',
   alignItems: 'center' as 'center',
   flexDirection: 'column' as 'column',
 }

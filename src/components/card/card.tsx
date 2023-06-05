@@ -1,6 +1,9 @@
 import * as style from './card.style'
 
-const Card = ({ product, deleteProduct, setEditData }: any) => {
+const Card = ({ product, deleteProduct, setEditData, popupMenu }: any) => {
+  const onEditClick = (data: any) => {
+    popupMenu(data)
+  }
   return (
     <div>
       {product?.products.map((product: any, index: number) => (
@@ -21,7 +24,10 @@ const Card = ({ product, deleteProduct, setEditData }: any) => {
             </p> */}
           </div>
           <div style={{ ...style.footer }}>
-            <div style={{ marginRight: 10, ...style.icon }} onClick={() => setEditData(product)}>
+            <div style={{ marginRight: 10, ...style.icon }} onClick={() => {
+              setEditData(product);
+              onEditClick(true);
+            }}>
               <img style={{ ...style.iconStyle, color: '#000' }} src="edit.png" alt="Edit" />
             </div>
             <div style={{ ...style.icon }} onClick={() => deleteProduct({ productId: product.id })}>

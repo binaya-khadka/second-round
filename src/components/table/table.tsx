@@ -1,7 +1,12 @@
 import * as style from './table.style'
 import * as styles from '../../preset-styles'
 
-const Table = ({ data, deleteProduct, setEditData, editData }: any) => {
+const Table = ({ data, deleteProduct, setEditData, editData, popupMenu }: any) => {
+
+  const onEditClick = (data: any) => {
+    popupMenu(data)
+  }
+
   return (
     <div style={{ ...styles.pageContainer, ...style.wrapper }}>
       <table style={{ ...style.table }}>
@@ -27,6 +32,7 @@ const Table = ({ data, deleteProduct, setEditData, editData }: any) => {
               <td style={{ ...style.inlineElement, ...style.tableData }}>
                 <input type="button" style={{ ...style.editButton }} value="Edit" onClick={() => {
                   setEditData(item)
+                  onEditClick(true)
                   // editData({ productId: item.id })
                 }} />
                 <input type="button" style={{ ...style.deleteButton }} value="Delete" onClick={() => deleteProduct({ productId: item.id })} />

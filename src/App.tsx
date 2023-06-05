@@ -5,7 +5,6 @@ import { Table, TableMobile } from "./components"
 import { useMediaQuery } from "react-responsive"
 import { useCallback, useState } from "react"
 import { AddProduct } from "./components"
-import Popup from 'reactjs-popup'
 
 export default function App() {
   const isMobile = useMediaQuery({ query: '(max-width: 375px)' });
@@ -28,6 +27,14 @@ export default function App() {
     },
     [product]
   );
+
+  const hidePopupShown = useCallback((data: boolean) => {
+    setPopupShown(data);
+  }, []);
+
+  const popupMenu = useCallback((data: any) => {
+    setPopupShown(data);
+  }, []);
 
   const fetchProduct: QueryFunction<any, any> = async () => {
     return await API.get('/products')
@@ -61,16 +68,16 @@ export default function App() {
 
   return (
     <div style={{ ...styles.pageContainer }}>
-      {/* <input type="button" value="Add Product" style={styles.triggerButton} onClick={() => {
+      <input type="button" value="Add Product" style={styles.triggerButton} onClick={() => {
         setPopupShown(true);
       }} />
       {popupShown ? (
-        <AddProduct addProduct={addProduct} editData={editData} />
-      ) : null} */}
+        <AddProduct addProduct={addProduct} editData={editData} hidePopupShown={hidePopupShown} />
+      ) : null}
       {/* <Popup trigger={<button style={{ ...styles.triggerButton, }}>Add Product</button>} position="right center"> */}
-      <AddProduct addProduct={addProduct} editData={editData} />
+      {/* <AddProduct addProduct={addProduct} editData={editData} /> */}
       {/* </Popup> */}
-      {isMobile ? <TableMobile setEditData={setEditData} product={product} deleteProduct={deleteProduct} /> : <Table setEditData={setEditData} data={product} deleteProduct={deleteProduct} />}
+      {isMobile ? <TableMobile setEditData={setEditData} product={product} deleteProduct={deleteProduct} popupMenu={popupMenu} /> : <Table setEditData={setEditData} data={product} deleteProduct={deleteProduct} popupMenu={popupMenu} />}
     </div>
   )
 }

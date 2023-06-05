@@ -18,7 +18,9 @@ const inputField = {
 };
 
 const submitButton = {
-  padding: '10px 12px'
+  padding: '8px 18px',
+  fontSize: '18px',
+  marginTop: 10,
 }
 
 export { lineHeight, centerDiv, inputField, submitButton }

@@ -1,15 +1,10 @@
 import { nanoid } from 'nanoid';
-import * as styles from '../../preset-styles';
+// import * as styles from '../../preset-styles';
 import * as style from './addproduct.style'
 import { useForm, Controller } from "react-hook-form";
 import { useEffect } from 'react';
 
-const AddProduct = ({ addProduct, editData, hidePopupShown, popupMenu }: any) => {
-
-  const onEditClick = (data: any) => {
-    popupMenu(data)
-  }
-
+const AddProduct = ({ addProduct, editData, hidePopupShown, popupMenu, isMobile }: any) => {
   const inputField = {
     marginTop: '10px',
     padding: '5px 7px',
@@ -55,8 +50,11 @@ const AddProduct = ({ addProduct, editData, hidePopupShown, popupMenu }: any) =>
 
   return (
     <div style={{ ...style.modal }}>
-      {/* <div style={{ ...styles.pageContainer, ...style.lineHeight, ...style.containerStyle }}> */}
-      <div style={{ ...style.modalInner }}>
+      <div style={{
+        ...style.modalInner,
+        width: isMobile ? "20rem" : "24rem",
+        transform: isMobile ? 'translate(-50%, 10%)' : 'translate(-55%, 10%)',
+      }}>
         <form onSubmit={handleSubmit(onSubmit)} style={{ ...style.centerDiv }}>
           <label htmlFor="product_name">Product Name</label>
           <Controller
@@ -66,7 +64,8 @@ const AddProduct = ({ addProduct, editData, hidePopupShown, popupMenu }: any) =>
               ({ field }) =>
                 <>
                   <input {...field} style={inputField} />
-                </>}
+                </>
+            }
           />
           <br />
           <label htmlFor="category_name">Category Name</label>

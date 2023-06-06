@@ -1,8 +1,7 @@
 import * as style from './table.style'
 import * as styles from '../../preset-styles'
 
-const Table = ({ data, deleteProduct, setEditData, editData, popupMenu }: any) => {
-
+const Table = ({ data, deleteProduct, setEditData, editData, popupMenu, searchData }: any) => {
   const onEditClick = (data: any) => {
     popupMenu(data)
   }
@@ -21,14 +20,13 @@ const Table = ({ data, deleteProduct, setEditData, editData, popupMenu }: any) =
           </tr>
         </thead>
         <tbody>
-          {data?.products?.map((item: any) => (
+          {data?.products?.filter((filterData: any) => filterData.product_name.toLowerCase().includes(searchData)).map((item: any) => (
             <tr key={item.id}>
               <td style={{ ...style.tableData }}>{item.product_name}</td>
               <td style={{ ...style.tableData }}>{item.category_name}</td>
               <td style={{ ...style.tableData }}>{item.description}</td>
               {/* <td style={{ ...style.tableData }}>{item.created_at.split("T")[0]}</td> */}
-              {/* <td style={{ ...style.tableData }}>{item.status}</td> */}
-              <td style={{ ...style.tableData }}>{(item?.status?.charAt(0).toUpperCase() + item?.status?.slice(1)).replaceAll("_", " ")}</td>
+              <td style={{ ...style.tableData }}>{item.status}</td>
               <td style={{ ...style.inlineElement, ...style.tableData }}>
                 <input type="button" style={{ ...style.editButton }} value="Edit" onClick={() => {
                   setEditData(item)

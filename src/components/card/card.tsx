@@ -1,19 +1,19 @@
 import * as style from './card.style'
 
-const Card = ({ product, deleteProduct, setEditData, popupMenu }: any) => {
+const Card = ({ product, deleteProduct, setEditData, popupMenu, searchData }: any) => {
   const onEditClick = (data: any) => {
     popupMenu(data)
   }
   return (
     <div>
-      {product?.products.map((product: any, index: number) => (
+      {product?.products?.filter((filterData: any) => filterData.product_name.toLowerCase().includes(searchData)).map((product: any, index: number) => (
         <div key={index} style={{ ...style.card }}>
           <div style={{ ...style.head }}>
             <p>
               {product.product_name}
             </p>
             <p>
-              {(product?.status?.charAt(0).toUpperCase() + product?.status?.slice(1)).replaceAll("_", " ")}
+              {product.status}
             </p>
           </div>
           <div style={{ ...style.body }}>

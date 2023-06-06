@@ -3,7 +3,7 @@ import { QueryFunction, useQuery } from "react-query"
 import * as styles from './preset-styles'
 import { Table, TableMobile } from "./components"
 import { useMediaQuery } from "react-responsive"
-import { useCallback, useState } from "react"
+import { useCallback, useState, useEffect } from "react"
 import { AddProduct } from "./components"
 
 export default function App() {
@@ -12,6 +12,8 @@ export default function App() {
   const [editData, setEditData] = useState<any>(null)
 
   const [popupShown, setPopupShown] = useState<boolean>(false);
+
+  const [searchData, setSearchData] = useState('');
 
   const addProduct = useCallback(
     ({ newProduct, editing }: { newProduct: any; editing: boolean }) => {
@@ -68,16 +70,27 @@ export default function App() {
 
   return (
     <div style={{ ...styles.pageContainer }}>
-      <input type="button" value="Add Product" style={styles.triggerButton} onClick={() => {
-        setPopupShown(true);
-      }} />
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: (isMobile ? "column" as "column" : "row" as "row"),
+      }}>
+        <input type="button" value="Add Product" style={styles.triggerButton} onClick={() => {
+          setPopupShown(true);
+        }} />
+        <input
+          style={{ ...styles.triggerButton }}
+          type="text"
+          name="searchQuery"
+          id="searchQuery"
+          placeholder="Search"
+          onChange={(e) => setSearchData(e.target.value.toLowerCase())}
+        />
+      </div>
       {popupShown ? (
-        <AddProduct addProduct={addProduct} editData={editData} hidePopupShown={hidePopupShown} />
+        <AddProduct addProduct={addProduct} editData={editData} hidePopupShown={hidePopupShown} isMobile={isMobile} />
       ) : null}
-      {/* <Popup trigger={<button style={{ ...styles.triggerButton, }}>Add Product</button>} position="right center"> */}
-      {/* <AddProduct addProduct={addProduct} editData={editData} /> */}
-      {/* </Popup> */}
-      {isMobile ? <TableMobile setEditData={setEditData} product={product} deleteProduct={deleteProduct} popupMenu={popupMenu} /> : <Table setEditData={setEditData} data={product} deleteProduct={deleteProduct} popupMenu={popupMenu} />}
+      {isMobile ? <TableMobile searchData={searchData} setEditData={setEditData} product={product} deleteProduct={deleteProduct} popupMenu={popupMenu} /> : <Table searchData={searchData} setEditData={setEditData} data={product} deleteProduct={deleteProduct} popupMenu={popupMenu} />}
     </div>
   )
 }

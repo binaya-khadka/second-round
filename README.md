@@ -1,6 +1,26 @@
-# Getting Started with Create React App
+# Second Round
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## To run the project
+
+You should have node package module i.e (npm) on your system
+
+### Then you should install all the packages required for the project
+
+You can all the necessary packages by running the following command
+
+```shell
+npm install
+```
+
+this installs all the required package for the project
+
+### Then you can run the Project on your System
+
+You can do this by running the command
+
+```shell
+npm start
+```
 
 ## Available Scripts
 

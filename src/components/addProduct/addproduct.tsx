@@ -101,7 +101,7 @@ const AddProduct = ({ addProduct, editData, hidePopupShown, popupMenu, isMobile 
             control={control}
             render={({ field }) =>
               <>
-                <select style={inputField} defaultValue={"out_off_stock"} {...field}>
+                <select style={inputField} {...field}>
                   <option value="out_off_stock">Out off stock</option>
                   <option value="limited_available">Limited available</option>
                   <option value="in_stock">In stock</option>
